@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>İLAN EKLEME</title>
+  <meta charset="UTF-8">
+
+  <meta name="description" content="--">
+  <meta name="keywords" content="--">
+  <meta name="author" content="--">
+
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2407905359805042"
+  crossorigin="anonymous"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">MARKA</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          {% if (session["pin_no"] in ["1"]) %}
+          <li class="nav-item">
+            <a class="nav-link" href="urun_ekle.html">MALZEME KAYIT</a>
+          </li>
+          {% endif %}
+          {% if (session["pin_no"] in ["1","2"]) %}
+          <li class="nav-item">
+            <a class="nav-link" href="urun_listele.html">MALZEME LİSTELE</a>
+          </li>
+          {% endif %}
+          {% if (session["pin_no"] in ["1"]) %}
+          <li class="nav-item">
+            <a class="nav-link" href="urun_cikis.html">ÜRÜN ÇIKIŞ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="masa.html">MASA</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="dolap.html">DOLAP</a>
+          </li>
+          {% endif %}
+          {% if (session["pin_no"] in ["1","2"]) %}
+          <li class="nav-item">
+            <a class="nav-link" href="cikti_listele.html">ÜRÜN LİSTELE</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <br>
+  <br>  <br>
+
+  {% block ali %}
+
+  {% endblock ali %}
+
+
+
+</body>
+
+
+</html>
