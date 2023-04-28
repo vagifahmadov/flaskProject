@@ -11,148 +11,161 @@
     </div>
   </div>
 
+  <form action="/info" method="POST" enctype="multipart/form-data">
+      <div class="container">
+        <div>
+          <label for="upload">
+            <input type="file" id="upload" name="fileUpload" multiple>
+          Dosya ekle
+          </label>
+        </div>
+        <div class="files">
+          <h4>Seçilmiş dosyalar</h4>
+          <ul></ul>
+        </div>
+        </div>
 
-  <form action="info.html">
-    <div class="container">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="city" class="form-label">Şehir</label>
+            <select class="form-select" id="city" name="city" required>
+              <option value="">Seçiniz...</option>
+              <option value=ADANA>ADANA</option>
+              <option value=ADIYAMAN>ADIYAMAN</option>
+              <option value=AFYONKARAHİSAR>AFYONKARAHİSAR</option>
+              <option value=AĞRI>AĞRI</option>
+              <option value=AMASYA>AMASYA</option>
+              <option value=ANKARA>ANKARA</option>
+              <option value=ANTALYA>ANTALYA</option>
+              <option value=ARTVİN>ARTVİN</option>
+              <option value=AYDIN>AYDIN</option>
+              <option value=BALIKESİR>BALIKESİR</option>
+              <option value=BİLECİK>BİLECİK</option>
+              <option value=BİNGÖL>BİNGÖL</option>
+              <option value=BİTLİS>BİTLİS</option>
+              <option value=BOLU>BOLU</option>
+              <option value=BURDUR>BURDUR</option>
+              <option value=BURSA>BURSA</option>
+              <option value=ÇANAKKALE>ÇANAKKALE</option>
+              <option value=ÇANKIRI>ÇANKIRI</option>
+              <option value=ÇORUM>ÇORUM</option>
+              <option value=DENİZLİ>DENİZLİ</option>
+              <option value=DİYARBAKIR>DİYARBAKIR</option>
+              <option value=EDİRNE>EDİRNE</option>
+              <option value=ELAZIĞ>ELAZIĞ</option>
+              <option value=ERZİNCAN>ERZİNCAN</option>
+              <option value=ERZURUM>ERZURUM</option>
+              <option value=ESKİŞEHİR>ESKİŞEHİR</option>
+              <option value=GAZİANTEP>GAZİANTEP</option>
+              <option value=GİRESUN>GİRESUN</option>
+              <option value=GÜMÜŞHANE>GÜMÜŞHANE</option>
+              <option value=HAKKARİ>HAKKARİ</option>
+              <option value=HATAY>HATAY</option>
+              <option value=ISPARTA>ISPARTA</option>
+              <option value=MERSİN>MERSİN</option>
+              <option value=İSTANBUL>İSTANBUL</option>
+              <option value=İZMİR>İZMİR</option>
+              <option value=KARS>KARS</option>
+              <option value=KASTAMONU>KASTAMONU</option>
+              <option value=KAYSERİ>KAYSERİ</option>
+              <option value=KIRKLARELİ>KIRKLARELİ</option>
+              <option value=KIRŞEHİR>KIRŞEHİR</option>
+              <option value=KOCAELİ>KOCAELİ</option>
+              <option value=KONYA>KONYA</option>
+              <option value=KÜTAHYA>KÜTAHYA</option>
+              <option value=MALATYA>MALATYA</option>
+              <option value=MANİSA>MANİSA</option>
+              <option value=KAHRAMANMARAŞ>KAHRAMANMARAŞ</option>
+              <option value=MARDİN>MARDİN</option>
+              <option value=MUĞLA>MUĞLA</option>
+              <option value=MUŞ>MUŞ</option>
+              <option value=NEVŞEHİR>NEVŞEHİR</option>
+              <option value=NİĞDE>NİĞDE</option>
+              <option value=ORDU>ORDU</option>
+              <option value=RİZE>RİZE</option>
+              <option value=SAKARYA>SAKARYA</option>
+              <option value=SAMSUN>SAMSUN</option>
+              <option value=SİİRT>SİİRT</option>
+              <option value=SİNOP>SİNOP</option>
+              <option value=SİVAS>SİVAS</option>
+              <option value=TEKİRDAĞ>TEKİRDAĞ</option>
+              <option value=TOKAT>TOKAT</option>
+              <option value=TRABZON>TRABZON</option>
+              <option value=TUNCELİ>TUNCELİ</option>
+              <option value=ŞANLIURFA>ŞANLIURFA</option>
+              <option value=UŞAK>UŞAK</option>
+              <option value=VAN>VAN</option>
+              <option value=YOZGAT>YOZGAT</option>
+              <option value=ZONGULDAK>ZONGULDAK</option>
+              <option value=AKSARAY>AKSARAY</option>
+              <option value=BAYBURT>BAYBURT</option>
+              <option value=KARAMAN>KARAMAN</option>
+              <option value=KIRIKKALE>KIRIKKALE</option>
+              <option value=BATMAN>BATMAN</option>
+              <option value=ŞIRNAK>ŞIRNAK</option>
+              <option value=BARTIN>BARTIN</option>
+              <option value=ARDAHAN>ARDAHAN</option>
+              <option value=IĞDIR>IĞDIR</option>
+              <option value=YALOVA>YALOVA</option>
+              <option value=KARABÜK>KARABÜK</option>
+              <option value=KİLİS>KİLİS</option>
+              <option value=OSMANİYE>OSMANİYE</option>
+              <option value=DÜZCE>DÜZCE</option>
+
+          </select>
+          <div class="invalid-feedback">
+            Şehir gerekli.
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+          <label for="dist" class="form-label">İlçe</label>
+          <select class="form-select" id="dist" name="dist" required>
+            <option value="">Seçiniz...</option>
+          </select>
+          <div class="invalid-feedback">
+            İlçe gerekli.
+          </div>
+        </div>
+      </div>
+
+
+      <div class="mb-3">
+        <label for="brand" class="form-label">Marka</label>
+        <input type="text" class="form-control" id="brand" name="brand" placeholder="MARKA" required>
+        <div class="invalid-feedback">
+          Marka gerekli.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="model" class="form-label">CESIT</label>
+        <input type="text" class="form-control" id="model" name="model" placeholder="ceşit" required>
+        <div class="invalid-feedback">
+          CESIT gerekli.
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-4 mb-3">
+          <label for="year" class="form-label">Yıl</label>
+          <input type="number" class="form-control" id="year" name="year" placeholder="2015, 2022, vb." required>
+          <div class="invalid-feedback">
+            Yıl gerekli.
+          </div>
+        </div>
+
+        
       <div class="row">
         <div class="col-md-4 mb-3">
-          <label for="city" class="form-label">Şehir</label>
-          <select class="form-select" id="city" name="city" required>
-            <option value="">Seçiniz...</option>
-            <option value=ADANA>ADANA</option>
-            <option value=ADIYAMAN>ADIYAMAN</option>
-            <option value=AFYONKARAHİSAR>AFYONKARAHİSAR</option>
-            <option value=AĞRI>AĞRI</option>
-            <option value=AMASYA>AMASYA</option>
-            <option value=ANKARA>ANKARA</option>
-            <option value=ANTALYA>ANTALYA</option>
-            <option value=ARTVİN>ARTVİN</option>
-            <option value=AYDIN>AYDIN</option>
-            <option value=BALIKESİR>BALIKESİR</option>
-            <option value=BİLECİK>BİLECİK</option>
-            <option value=BİNGÖL>BİNGÖL</option>
-            <option value=BİTLİS>BİTLİS</option>
-            <option value=BOLU>BOLU</option>
-            <option value=BURDUR>BURDUR</option>
-            <option value=BURSA>BURSA</option>
-            <option value=ÇANAKKALE>ÇANAKKALE</option>
-            <option value=ÇANKIRI>ÇANKIRI</option>
-            <option value=ÇORUM>ÇORUM</option>
-            <option value=DENİZLİ>DENİZLİ</option>
-            <option value=DİYARBAKIR>DİYARBAKIR</option>
-            <option value=EDİRNE>EDİRNE</option>
-            <option value=ELAZIĞ>ELAZIĞ</option>
-            <option value=ERZİNCAN>ERZİNCAN</option>
-            <option value=ERZURUM>ERZURUM</option>
-            <option value=ESKİŞEHİR>ESKİŞEHİR</option>
-            <option value=GAZİANTEP>GAZİANTEP</option>
-            <option value=GİRESUN>GİRESUN</option>
-            <option value=GÜMÜŞHANE>GÜMÜŞHANE</option>
-            <option value=HAKKARİ>HAKKARİ</option>
-            <option value=HATAY>HATAY</option>
-            <option value=ISPARTA>ISPARTA</option>
-            <option value=MERSİN>MERSİN</option>
-            <option value=İSTANBUL>İSTANBUL</option>
-            <option value=İZMİR>İZMİR</option>
-            <option value=KARS>KARS</option>
-            <option value=KASTAMONU>KASTAMONU</option>
-            <option value=KAYSERİ>KAYSERİ</option>
-            <option value=KIRKLARELİ>KIRKLARELİ</option>
-            <option value=KIRŞEHİR>KIRŞEHİR</option>
-            <option value=KOCAELİ>KOCAELİ</option>
-            <option value=KONYA>KONYA</option>
-            <option value=KÜTAHYA>KÜTAHYA</option>
-            <option value=MALATYA>MALATYA</option>
-            <option value=MANİSA>MANİSA</option>
-            <option value=KAHRAMANMARAŞ>KAHRAMANMARAŞ</option>
-            <option value=MARDİN>MARDİN</option>
-            <option value=MUĞLA>MUĞLA</option>
-            <option value=MUŞ>MUŞ</option>
-            <option value=NEVŞEHİR>NEVŞEHİR</option>
-            <option value=NİĞDE>NİĞDE</option>
-            <option value=ORDU>ORDU</option>
-            <option value=RİZE>RİZE</option>
-            <option value=SAKARYA>SAKARYA</option>
-            <option value=SAMSUN>SAMSUN</option>
-            <option value=SİİRT>SİİRT</option>
-            <option value=SİNOP>SİNOP</option>
-            <option value=SİVAS>SİVAS</option>
-            <option value=TEKİRDAĞ>TEKİRDAĞ</option>
-            <option value=TOKAT>TOKAT</option>
-            <option value=TRABZON>TRABZON</option>
-            <option value=TUNCELİ>TUNCELİ</option>
-            <option value=ŞANLIURFA>ŞANLIURFA</option>
-            <option value=UŞAK>UŞAK</option>
-            <option value=VAN>VAN</option>
-            <option value=YOZGAT>YOZGAT</option>
-            <option value=ZONGULDAK>ZONGULDAK</option>
-            <option value=AKSARAY>AKSARAY</option>
-            <option value=BAYBURT>BAYBURT</option>
-            <option value=KARAMAN>KARAMAN</option>
-            <option value=KIRIKKALE>KIRIKKALE</option>
-            <option value=BATMAN>BATMAN</option>
-            <option value=ŞIRNAK>ŞIRNAK</option>
-            <option value=BARTIN>BARTIN</option>
-            <option value=ARDAHAN>ARDAHAN</option>
-            <option value=IĞDIR>IĞDIR</option>
-            <option value=YALOVA>YALOVA</option>
-            <option value=KARABÜK>KARABÜK</option>
-            <option value=KİLİS>KİLİS</option>
-            <option value=OSMANİYE>OSMANİYE</option>
-            <option value=DÜZCE>DÜZCE</option>
-
-        </select>
-        <div class="invalid-feedback">
-          Şehir gerekli.
-        </div>
-      </div>
-
-      <div class="col-md-4 mb-3">
-        <label for="dist" class="form-label">İlçe</label>
-        <select class="form-select" id="dist" name="dist" required>
-          <option value="">Seçiniz...</option>
-        </select>
-        <div class="invalid-feedback">
-          İlçe gerekli.
+          <input type="submit" class="btn btn-primary" value="Devam">
         </div>
       </div>
     </div>
-
-
-    <div class="mb-3">
-      <label for="brand" class="form-label">Marka</label>
-      <input type="text" class="form-control" id="brand" name="brand" placeholder="MARKA" required>
-      <div class="invalid-feedback">
-        Marka gerekli.
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label for="model" class="form-label">CESIT</label>
-      <input type="text" class="form-control" id="model" name="model" placeholder="ceşit" required>
-      <div class="invalid-feedback">
-        CESIT gerekli.
-      </div>
-    </div>
-
-    <div class="row g-3">
-      <div class="col-md-4 mb-3">
-        <label for="year" class="form-label">Yıl</label>
-        <input type="number" class="form-control" id="year" name="year" placeholder="2015, 2022, vb." required>
-        <div class="invalid-feedback">
-          Yıl gerekli.
-        </div>
-      </div>
-
-
-    <div class="row">
-      <div class="col-md-4 mb-3">
-        <button method="POST" action = "info.html" type="submit" class="btn btn-primary">Devam </button>
-      </div>
-    </div>
-  </div>
+  </form>
 </div>
-</form>
 
 
 
