@@ -180,6 +180,7 @@
     const city  = document.getElementById("city");
     const dist = document.getElementById("dist");
     const brand = document.getElementById("brand");
+    const year = document.getElementById("year");
 
     const xhr = new XMLHttpRequest();
     const form_data = new FormData();
@@ -191,13 +192,14 @@
     form_data.append("brand", brand.value);
     form_data.append("city", city.value);
     form_data.append("dist", dist.value);
+    form_data.append("year", year.value);
 
     xhr.open("post", "/upload");
     xhr.send(form_data);
     const status_r = xhr.status;
     if (status_r === 0){
       console.log(form_data);
-      window.location.href = "/info?brand="+brand.value+"&city="+city.value+"&dist="+dist.value+"&totalFiles="+c;
+      window.location.href = "/info?brand="+brand.value+"&year="+year.value+"&city="+city.value+"&dist="+dist.value+"&totalFiles="+c;
     }
   }
   const cityDistricts = {

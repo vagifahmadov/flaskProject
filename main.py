@@ -35,8 +35,9 @@ def upload():
         city = request.form.get('city')
         dist = request.form.get('dist')
         brand = request.form.get('brand')
+        year = request.form.get('year')
 
-        return_data = {'city': city, 'dist': dist, 'brand': brand, 'totalFiles': len(files)}
+        return_data = {'city': city, 'year': year, 'dist': dist, 'brand': brand, 'totalFiles': len(files)}
         print(return_data)
         return "Uploaded successfully!"
 
@@ -48,8 +49,9 @@ def info():
     brand = request.args['brand']
     city = request.args['city']
     dist = request.args['dist']
+    year = request.args['year']
     total_files = request.args['totalFiles']
-    data = {'brand': brand, 'city': city, 'dist': dist, 'totalFiles': total_files}
+    data = {'brand': brand, 'city': city, 'year': year, 'dist': dist, 'totalFiles': total_files}
     print('CALLED from here')
     return render_template('result.html', data=data)
 
