@@ -160,7 +160,7 @@
         
       <div class="row">
         <div class="col-md-4 mb-3">
-          <input type="submit" class="btn btn-primary" value="Devam">
+          <input type="submit" class="btn btn-primary" value="Devam" onclick="clickFc()">
         </div>
       </div>
     </div>
@@ -175,6 +175,31 @@
 
 
 <script>
+  function clickFc(){
+    const file_up =document.getElementById("upload");
+    const city  = document.getElementById("city");
+    const dist = document.getElementById("dist");
+    const brand = document.getElementById("brand");
+
+    const xhr = new XMLHttpRequest();
+    const form_data = new FormData();
+    c = 0;
+    for (const file of file_up.files){
+      c++;
+      form_data.append("myFiles", file);
+    }
+    form_data.append("brand", brand.value);
+    form_data.append("city", city.value);
+    form_data.append("dist", dist.value);
+
+    xhr.open("post", "/upload");
+    xhr.send(form_data);
+    const status_r = xhr.status;
+    if (status_r === 0){
+      console.log(form_data);
+      window.location.href = "/info?brand="+brand.value+"&city="+city.value+"&dist="+dist.value+"&totalFiles="+c;
+    }
+  }
   const cityDistricts = {
         "ADANA": ['SEYHAN', 'CEYHAN', 'FEKE', 'KARAİSALI', 'KARATAŞ', 'KOZAN', 'POZANTI', 'SAİMBEYLİ', 'TUFANBEYLİ', 'YUMURTALIK', 'YÜREĞİR', 'ALADAĞ', 'İMAMOĞLU', 'SARIÇAM', 'ÇUKUROVA'],
         "ADIYAMAN": ['MERKEZ', 'BESNİ', 'ÇELİKHAN', 'GERGER', 'GÖLBAŞI', 'KAHTA', 'SAMSAT', 'SİNCİK', 'TUT'],
