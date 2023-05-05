@@ -3,11 +3,35 @@
 {% block ali %}
 
 
-
+      <!--slider-->
+      <div class="container">
+        <div class="slider">
+          <div class="slider__slides">
+            <div class="slider__slide active">
+              <img src="{{ url_for('static', filename='img/header/1.jpg') }}" alt="A castle in Scotland" />
+            </div>
+            <div class="slider__slide">
+              <img src="{{ url_for('static', filename='img/header/2.jpg') }}" alt="A street market in China" />
+            </div>
+            <div class="slider__slide">
+              <img src="{{ url_for('static', filename='img/header/3.jpg') }}" alt="A statue of the Buddha in Thailand" />
+            </div>
+          </div>
+          <div id="nav-button--prev" class="slider__nav-button"></div>
+          <div id="nav-button--next" class="slider__nav-button"></div>
+          <div class="slider__nav">
+            <div class="slider__navlink active"></div>
+            <div class="slider__navlink"></div>
+            <div class="slider__navlink"></div>
+          </div>
+        </div>
+      </div>
+      <!--slider-->
 <div class="container">
   <div class="row mb-5">
     <div class="col-md-12">
-      <h1 class="text-center bg-dark text-white py-3">BAŞLIK</h1>
+
+     
     </div>
   </div>
 
@@ -15,16 +39,20 @@
       <div class="container">
         <div>
           <label for="upload">
-            <input type="file" id="upload" name="fileUpload" multiple>
+            <input type="file" id="upload" name="fileUpload" accept="image/*" onchange="loadFile(event)">
           Dosya ekle
           </label>
         </div>
         <div class="files">
-          <h4>Seçilmiş dosyalar</h4>
+          <h4>Seçilmiş dosya</h4>
           <ul></ul>
         </div>
         </div>
 
+      <div class="container" style="height400px; margin-bottom: 20px; padding: 10px;" id="previewDIV">
+        <img id="output"  style="text-align:center;vertical-align:middle;max-width:400px;max-height:400px;position: sticky;margin-left: auto;margin-right: auto;display: block;" />
+      </div>
+        
 
       <div class="container">
         <div class="row">
@@ -175,6 +203,58 @@
 
 
 <script>
+  // slider
+  let slides = document.getElementsByClassName("slider__slide");
+  let navlinks = document.getElementsByClassName("slider__navlink");
+  let currentSlide = 0;
+  
+  // timeout loop
+  function timeout() {
+      setTimeout(function () {
+          changeSlide(currentSlide + 1);
+          timeout();
+      }, 4000);
+  }
+  timeout();
+  // timeout loop
+
+  document.getElementById("nav-button--next").addEventListener("click", () => {
+      changeSlide(currentSlide + 1)
+  });
+  document.getElementById("nav-button--prev").addEventListener("click", () => {
+      changeSlide(currentSlide - 1)
+  });
+
+  function changeSlide(moveTo) {
+      if (moveTo >= slides.length) {moveTo = 0;}
+      if (moveTo < 0) {moveTo = slides.length - 1;}
+      
+      slides[currentSlide].classList.toggle("active");
+      navlinks[currentSlide].classList.toggle("active");
+      slides[moveTo].classList.toggle("active");
+      navlinks[moveTo].classList.toggle("active");
+      
+      currentSlide = moveTo;
+  }
+
+  document.querySelectorAll('.slider__navlink').forEach((bullet, bulletIndex) => {
+      bullet.addEventListener('click', () => {
+          if (currentSlide !== bulletIndex) {
+              changeSlide(bulletIndex);
+          }
+      })
+  })
+  // preview
+  var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    document.getElementById("previewDIV").style.backgroundColor = "#EEEEEE";
+    document.getElementById("output").style.maxWidth = "400px";
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+  // upload
   function clickFc(){
     const file_up =document.getElementById("upload");
     const city  = document.getElementById("city");
@@ -197,8 +277,7 @@
     xhr.open("post", "/upload");
     xhr.send(form_data);
     const status_r = xhr.status;
-    if (status_r === 0){
-      console.log(form_data);
+    if (XMLHttpRequest.DONE === 4){
       window.location.href = "/info?brand="+brand.value+"&year="+year.value+"&city="+city.value+"&dist="+dist.value+"&totalFiles="+c;
     }
   }

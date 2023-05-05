@@ -24,11 +24,13 @@ $(".files").on("click", "li > i", function (e) {
   curArr.splice(key, 1);
   updateState({ filesArr: curArr });
   renderFileList();
+  document.getElementById('output').removeAttribute('src');
+  document.getElementById('previewDIV').style.backgroundColor = "";
 });
 
 $("form").on("submit", function (e) {
   e.preventDefault();
-  console.log(state);
+  console.log(e);
   renderFileList();
 });
 
