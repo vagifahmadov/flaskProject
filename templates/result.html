@@ -44,11 +44,16 @@
     Dist: <b>{{data.dist}}</b><br>
     Brand: <b>{{data.brand}}</b><br>
     Year: <b>{{data.year}}</b><br>
-    Total files: <b>{{data.totalFiles}}</b><br>
+    Total files: <b>{{data.fileName}}</b><br>
+    <input type="submit" class="btn btn-primary" value="Geri" onclick="clickFc()">
   </div>
 
 
 </body>
-
+<script>
+function clickFc(){
+  window.location.href = "/"
+}
+</script>
 
 </html>

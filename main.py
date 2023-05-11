@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify, json, session
 import random
 import string
 import csv
@@ -8,12 +8,24 @@ upload_folder = 'static/img/header'
 app.config['UPLOAD_FOLDER'] = upload_folder
 app.secret_key = "marangozum"
 
+
 ### index ŞEHİR İLÇE BİLGİSİ İSTER
 
 @app.route('/')
 def home():
     # print({"ip_1": request.remote_addr})
-    return render_template('index.html')
+    csv_file = "db.csv"
+    dict_data = []
+    c = 0
+    with open(csv_file, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            row.update({'active': 'active'}) if c == 0 else row.update({'active': ''})
+            c += 1
+            print(row)
+            dict_data.append(row)
+
+    return render_template('index.html', data=dict_data)
 
 
 ### TÜM BİLGİLERİ İSTER ŞEHİR İLÇEYİ İŞLER
@@ -27,6 +39,7 @@ def upload():
 
         # Iterate for each file in the files List, and Save them
         print(files)
+        filename = ''
         for file in files:
             extension = str(file.filename).split(".")[-1]
             print(extension)
@@ -37,46 +50,71 @@ def upload():
         dist = request.form.get('dist')
         brand = request.form.get('brand')
         year = request.form.get('year')
+        # insert to CSV
+        csv_file = "db.csv"
+        csv_columns = ['city', 'dist', 'brand', 'year', 'fileName']
+        dict_data = []
+        csv_file = "db.csv"
+        with open(csv_file, newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                dict_data.append(row)
+        dict_data.append({'city': city, 'year': year, 'dist': dist, 'fileName': filename, 'brand': brand})
+        try:
+            with open(csv_file, 'w') as csvfile:
+                writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+                writer.writeheader()
+                data: dict
+                for data in dict_data:
+                    writer.writerow(data)
+        except IOError:
+            print("I/O error")
 
-        return_data = {'city': city, 'year': year, 'dist': dist, 'brand': brand, 'totalFiles': len(files)}
-        print(return_data)
-        return "Uploaded successfully!"
+        print(dict_data[0])
+        session['data'] = dict_data[0]
+        # return redirect(url_for('.info', messages=messages, code=302))
+        # return render_template('result.html', data=return_data)
+        return jsonify(dict_data[0])
 
     return "Not supported method!"
 
 
 @app.route('/info')
 def info():
-    brand = request.args['brand']
-    city = request.args['city']
-    dist = request.args['dist']
-    year = request.args['year']
-    total_files = request.args['totalFiles']
-    data = {'brand': brand, 'city': city, 'year': year, 'dist': dist, 'totalFiles': total_files}
+    messages = session['data']
     print('CALLED from here')
-    return render_template('result.html', data=data)
+    return render_template('result.html', data=json.loads(json.dumps(messages)))
 
 
 @app.route('/csv')
 def csv_f():
-    ram_res = []
-    with open('db.csv') as f:
-        # print(f.read())
-        ram_res.append(f.read())
-    f.close()
-    ram_res.append({"name": "111saa.jpg"})
-    # open the file in the write mode
-    print(ram_res)
-    with open('db.csv', 'w', newline='') as file:
-        fieldnames = ['name']
-        writer = csv.DictWriter(file, fieldnames=fieldnames)
+    csv_columns = ['No', 'Name', 'Country']
+    dict_data = []
+    csv_file = "db.csv"
+    with open(csv_file, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            dict_data.append(row)
+            print(row)
 
-        writer.writeheader()
-        list(map(lambda d: print(d), ram_res))
-        list(map(lambda d: writer.writerow(d), ram_res))
+    dict_data2 = [
+        {'No': 1, 'Name': 'Alex', 'Country': 'India'},
+        {'No': 2, 'Name': 'Ben', 'Country': 'USA'},
+        {'No': 3, 'Name': 'Shri Ram', 'Country': 'India'},
+        {'No': 4, 'Name': 'Smith', 'Country': 'USA'},
+        {'No': 5, 'Name': 'Yuva Raj', 'Country': 'India'},
+    ]
 
-    # close the file
-    f.close()
+    list(map(lambda d: dict_data.append(d), dict_data2))
+    try:
+        with open(csv_file, 'w') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+            writer.writeheader()
+            data: dict
+            for data in dict_data:
+                writer.writerow(data)
+    except IOError:
+        print("I/O error")
 
     return "Ok"
 

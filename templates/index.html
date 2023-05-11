@@ -7,22 +7,26 @@
       <div class="container">
         <div class="slider">
           <div class="slider__slides">
-            <div class="slider__slide active">
-              <img src="{{ url_for('static', filename='img/header/1.jpg') }}" alt="A castle in Scotland" />
+            {% for item in data %}
+            <div class="slider__slide {{item.active}}">
+              <img src="{{ url_for('static', filename='img/header/'+item.fileName) }}" alt={{item.city}} />
             </div>
-            <div class="slider__slide">
+            <!--<div class="slider__slide">
               <img src="{{ url_for('static', filename='img/header/2.jpg') }}" alt="A street market in China" />
             </div>
             <div class="slider__slide">
               <img src="{{ url_for('static', filename='img/header/3.jpg') }}" alt="A statue of the Buddha in Thailand" />
-            </div>
+            </div>-->
+            {% endfor %}
           </div>
           <div id="nav-button--prev" class="slider__nav-button"></div>
           <div id="nav-button--next" class="slider__nav-button"></div>
           <div class="slider__nav">
-            <div class="slider__navlink active"></div>
-            <div class="slider__navlink"></div>
-            <div class="slider__navlink"></div>
+            {% for item in data %}
+            <div class="slider__navlink {{item.active}}"></div>
+            <!--<div class="slider__navlink"></div>
+            <div class="slider__navlink"></div>-->
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -268,7 +272,7 @@
     for (const file of file_up.files){
       c++;
       form_data.append("myFiles", file);
-    }
+    };
     form_data.append("brand", brand.value);
     form_data.append("city", city.value);
     form_data.append("dist", dist.value);
@@ -276,11 +280,13 @@
 
     xhr.open("post", "/upload");
     xhr.send(form_data);
+    console.log(xhr.response);
     const status_r = xhr.status;
     if (XMLHttpRequest.DONE === 4){
-      window.location.href = "/info?brand="+brand.value+"&year="+year.value+"&city="+city.value+"&dist="+dist.value+"&totalFiles="+c;
+      //window.location.href = "/info?brand="+brand.value+"&year="+year.value+"&city="+city.value+"&dist="+dist.value+"&data.fileName="+c;
+      window.location.href = "/info";
     }
-  }
+  };
   const cityDistricts = {
         "ADANA": ['SEYHAN', 'CEYHAN', 'FEKE', 'KARAİSALI', 'KARATAŞ', 'KOZAN', 'POZANTI', 'SAİMBEYLİ', 'TUFANBEYLİ', 'YUMURTALIK', 'YÜREĞİR', 'ALADAĞ', 'İMAMOĞLU', 'SARIÇAM', 'ÇUKUROVA'],
         "ADIYAMAN": ['MERKEZ', 'BESNİ', 'ÇELİKHAN', 'GERGER', 'GÖLBAŞI', 'KAHTA', 'SAMSAT', 'SİNCİK', 'TUT'],
@@ -383,7 +389,7 @@
       option.value = district;
       option.textContent = district;
       districtSelect.appendChild(option);
-    }
+    };
   });
 </script>
 
